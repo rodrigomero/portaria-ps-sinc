@@ -19,7 +19,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public CarDTO findById(Integer id) {
 
-        return  repository.findById(id)
+        return repository.findById(id)
                 .map(CarDTO::toDTO)
                 .orElseThrow(() -> new RuntimeException("Nenhuma empresa encontrada para o ID informado"));
     }

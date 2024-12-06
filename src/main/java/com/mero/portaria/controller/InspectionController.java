@@ -3,7 +3,6 @@ package com.mero.portaria.controller;
 import com.mero.portaria.domain.model.dto.InspectionDTO;
 import com.mero.portaria.domain.service.InspectionService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

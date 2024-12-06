@@ -19,7 +19,7 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public DriverDTO findById(Integer id) {
 
-        return  repository.findById(id)
+        return repository.findById(id)
                 .map(DriverDTO::toDTO)
                 .orElseThrow(() -> new RuntimeException("Nenhuma empresa encontrada para o ID informado"));
     }

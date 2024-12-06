@@ -19,7 +19,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDTO findById(Integer id) {
 
-        return  repository.findById(id)
+        return repository.findById(id)
                 .map(CompanyDTO::toDTO)
                 .orElseThrow(() -> new RuntimeException("Nenhuma empresa encontrada para o ID informado"));
     }
@@ -27,7 +27,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDTO findByName(String name) {
 
-        return  repository.findByName(name)
+        return repository.findByName(name)
                 .map(CompanyDTO::toDTO)
                 .orElseThrow(() -> new RuntimeException("Nenhuma empresa encontrada para o nome informado"));
     }

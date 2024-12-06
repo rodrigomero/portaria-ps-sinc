@@ -19,7 +19,7 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public StaffDTO findById(Integer id) {
 
-        return  repository.findById(id)
+        return repository.findById(id)
                 .map(StaffDTO::toDTO)
                 .orElseThrow(() -> new RuntimeException("Nenhuma empresa encontrada para o ID informado"));
     }
@@ -27,7 +27,7 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public StaffDTO findByName(String name) {
 
-        return  repository.findByName(name)
+        return repository.findByName(name)
                 .map(StaffDTO::toDTO)
                 .orElseThrow(() -> new RuntimeException("Nenhuma empresa encontrada para o nome informado"));
     }

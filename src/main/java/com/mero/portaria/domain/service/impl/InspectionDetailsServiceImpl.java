@@ -19,7 +19,7 @@ public class InspectionDetailsServiceImpl implements InspectionDetailsService {
     @Override
     public InspectionDetailsDTO findById(Integer id) {
 
-        return  repository.findById(id)
+        return repository.findById(id)
                 .map(InspectionDetailsDTO::toDTO)
                 .orElseThrow(() -> new RuntimeException("Nenhuma empresa encontrada para o ID informado"));
     }
