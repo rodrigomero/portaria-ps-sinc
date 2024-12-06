@@ -1,5 +1,6 @@
 package com.mero.portaria.controller;
 
+import com.mero.portaria.domain.model.dto.LoginDTO;
 import com.mero.portaria.domain.model.dto.StaffDTO;
 import com.mero.portaria.domain.service.StaffService;
 import jakarta.validation.Valid;
@@ -39,6 +40,11 @@ public class StaffController {
     public StaffDTO saveStaff(@RequestBody @Valid StaffDTO dto) {
 
         return service.saveStaff(dto);
+    }
+
+    @PostMapping("/login")
+    public StaffDTO loginUser(@RequestBody @Valid LoginDTO dto) {
+        return service.login(dto);
     }
 
 }

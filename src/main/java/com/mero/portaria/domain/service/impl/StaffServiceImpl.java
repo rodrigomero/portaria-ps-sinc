@@ -1,6 +1,7 @@
 package com.mero.portaria.domain.service.impl;
 
 import com.mero.portaria.domain.model.Staff;
+import com.mero.portaria.domain.model.dto.LoginDTO;
 import com.mero.portaria.domain.model.dto.StaffDTO;
 import com.mero.portaria.domain.repository.StaffRepository;
 import com.mero.portaria.domain.service.StaffService;
@@ -57,5 +58,28 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<StaffDTO> findAll() {
         return repository.findAll().stream().map(StaffDTO::toDTO).toList();
+    }
+
+    @Override
+    public Staff getAttachedById(Integer id) {
+        Optional<Staff> staff = repository.findById(id);
+        if (staff.isEmpty()) {
+            throw new RuntimeException("Staff nao encontrado");
+        }
+        return staff.get();
+
+    }
+
+    @Override
+    public StaffDTO login(LoginDTO dto) {
+        StaffDTO staff = findByEmail(dto.getEmail());
+
+        return staff.getPassword().equals(dto.getPassword()) ? staff : null;
+    }
+
+    private StaffDTO findByEmail(String email) {
+        return repository.findByEmail(email)
+                .map(StaffDTO::toDTO)
+                .orElseThrow(() -> new RuntimeException("Nenhuma conta encontrada para o email informado"));
     }
 }

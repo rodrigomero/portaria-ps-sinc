@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface StaffRepository extends JpaRepository<Staff, Integer> {
     Optional<Staff> findByName(String name);
+
+    Optional<Staff> findByEmail(String email);
 }
