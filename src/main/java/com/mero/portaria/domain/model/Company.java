@@ -1,5 +1,6 @@
 package com.mero.portaria.domain.model;
 
+import com.mero.portaria.domain.model.dto.CompanyDTO;
 import com.mero.portaria.domain.utils.UtilReflection;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,8 +36,8 @@ public class Company {
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     private List<Driver> drivers;
 
-    public void cloneFromDTO(ProductDTO productDTO) {
-        String[] ignoredProperties = UtilReflection.getIgnoredProperties(productDTO);
-        BeanUtils.copyProperties(productDTO, this, ignoredProperties);
+    public void cloneFromDTO(CompanyDTO companyDTO) {
+        String[] ignoredProperties = UtilReflection.getIgnoredProperties(companyDTO);
+        BeanUtils.copyProperties(companyDTO, this, ignoredProperties);
     }
 }

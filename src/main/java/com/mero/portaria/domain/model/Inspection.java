@@ -1,7 +1,9 @@
 package com.mero.portaria.domain.model;
 
 
+import com.mero.portaria.domain.model.dto.InspectionDTO;
 import com.mero.portaria.domain.model.enums.InspectionTypeEnum;
+import com.mero.portaria.domain.utils.UtilReflection;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,15 +34,8 @@ public class Inspection {
 
     private Integer inspectorId;
 
-    public static Inspection toDTO(Inspection inspection) {
-        Inspection dto = new Inspection();
-        BeanUtils.copyProperties(inspection, dto);
-        return dto;
-    }
-
-    public Inspection toEntity() {
-        Inspection inspection = new Inspection();
-        BeanUtils.copyProperties(this, inspection);
-        return inspection;
+    public void cloneFromDTO(InspectionDTO inspectionDTO) {
+        String[] ignoredProperties = UtilReflection.getIgnoredProperties(inspectionDTO);
+        BeanUtils.copyProperties(inspectionDTO, this, ignoredProperties);
     }
 }

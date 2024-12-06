@@ -1,5 +1,7 @@
 package com.mero.portaria.domain.model;
 
+import com.mero.portaria.domain.model.dto.DriverDTO;
+import com.mero.portaria.domain.utils.UtilReflection;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -28,15 +30,8 @@ public class Driver {
 
     private Integer activeCar;
 
-    public static Driver toDTO(Driver driver) {
-        Driver dto = new Driver();
-        BeanUtils.copyProperties(driver, dto);
-        return dto;
-    }
-
-    public Driver toEntity() {
-        Driver driver = new Driver();
-        BeanUtils.copyProperties(this, driver);
-        return driver;
+    public void cloneFromDTO(DriverDTO driverDTO) {
+        String[] ignoredProperties = UtilReflection.getIgnoredProperties(driverDTO);
+        BeanUtils.copyProperties(driverDTO, this, ignoredProperties);
     }
 }

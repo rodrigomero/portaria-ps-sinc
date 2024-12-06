@@ -1,7 +1,9 @@
 package com.mero.portaria.domain.model;
 
 
+import com.mero.portaria.domain.model.dto.StaffDTO;
 import com.mero.portaria.domain.model.enums.RoleEnum;
+import com.mero.portaria.domain.utils.UtilReflection;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -30,15 +32,8 @@ public class Staff {
     @NotBlank
     private String name;
 
-    public static Staff toDTO(Staff staff) {
-        Staff dto = new Staff();
-        BeanUtils.copyProperties(staff, dto);
-        return dto;
-    }
-
-    public Staff toEntity() {
-        Staff staff = new Staff();
-        BeanUtils.copyProperties(this, staff);
-        return staff;
+    public void cloneFromDTO(StaffDTO staffDTO) {
+        String[] ignoredProperties = UtilReflection.getIgnoredProperties(staffDTO);
+        BeanUtils.copyProperties(staffDTO, this, ignoredProperties);
     }
 }
