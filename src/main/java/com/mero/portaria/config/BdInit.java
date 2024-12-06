@@ -35,13 +35,13 @@ public class BdInit {
     @Transactional
     public Boolean startDB() {
 
-        Company company = new Company(null, "TechTransport Ltd", "12345678000199", "+5511999999999", "Av. Paulista, 1234, São Paulo, SP", "contact@techtransport.com", null);
+        Company company = new Company(null, "TechTransport Ltd", "12345678000199", "+5511999999999", "Av. Paulista, 1234, São Paulo, SP", "contact@techtransport.com");
         companyRepository.save(company);
 
-        Staff staff1 = new Staff(null, "john.inspector@example.com", "123", RoleEnum.INSPETOR, "John Inspector", null, null);
-        Staff staff2 = new Staff(null, "jjane.admin@example.com", "123", RoleEnum.GERENTE, "Jane Inspector", null, null);
-        Staff staff3 = new Staff(null, "moto.admin@example.com", "123", RoleEnum.MOTORISTA, "Joao Motorista", null, null);
-        Staff staff4 = new Staff(null, "moto2.admin@example.com", "123", RoleEnum.MOTORISTA, "Joao2 Motorista", null, null);
+        Staff staff1 = new Staff(null, "john.inspector@example.com", "123", RoleEnum.INSPETOR, "John Inspector", null);
+        Staff staff2 = new Staff(null, "jjane.admin@example.com", "123", RoleEnum.GERENTE, "Jane Inspector", null);
+        Staff staff3 = new Staff(null, "moto.admin@example.com", "123", RoleEnum.MOTORISTA, "Joao Motorista", null);
+        Staff staff4 = new Staff(null, "moto2.admin@example.com", "123", RoleEnum.MOTORISTA, "Joao2 Motorista", null);
         staffRepository.save(staff1);
         staffRepository.save(staff2);
         staffRepository.save(staff3);
