@@ -1,7 +1,10 @@
 package com.mero.portaria.domain.repository;
 
-import com.mero.portaria.domain.model.Inspection;
+import com.mero.portaria.domain.model.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StaffRepository extends JpaRepository<Inspection, Integer> {
+import java.util.Optional;
+
+public interface StaffRepository extends JpaRepository<Staff, Integer> {
+    Optional<Staff> findByName(String name);
 }
