@@ -1,50 +1,73 @@
 package com.mero.portaria.config;
 
-import com.mero.portaria.domain.repository.UsersRepository;
+import com.mero.portaria.domain.model.*;
+import com.mero.portaria.domain.model.enums.CarTypeEnum;
+import com.mero.portaria.domain.model.enums.InspectionTypeEnum;
+import com.mero.portaria.domain.model.enums.RoleEnum;
+import com.mero.portaria.domain.model.enums.StatusEnum;
+import com.mero.portaria.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+
+import java.time.LocalDateTime;
 
 @Profile("local")
 @Configuration
 public class BdInit {
-    @Autowired
-    private UsersRepository usersRepository;
-    @Autowired
-    private ProductsRepository productsRepository;
-    @Autowired
-    private OrdersRepository ordersRepository;
-    @Autowired
-    private ProductOrdersRepository productOrdersRepository;
 
-//    @Bean
-//    public Boolean startDB() {
-//        User user1 = new User(null, "rodrigo", "123", "meroo@gmail.com", true, null);
-//        User user2 = new User(null, "rodrigo2", "123", "meroo@gmail.com", false, null);
-//        User user3 = new User(null, "rodrigo3", "123", "meroo@gmail.com", true, null);
-//        usersRepository.save(user1);
-//        usersRepository.save(user2);
-//        usersRepository.save(user3);
-//
-//        Company product1 = new Company(null, "Guitarra", "descricao", CategoryEnum.INSTRUMENTO, BigDecimal.TEN, 10, true, null);
-//        Company product2 = new Company(null, "Afinador", "descricao", CategoryEnum.ACESSORIO, BigDecimal.TEN, 10, true, null);
-//        Company product3 = new Company(null, "Marshall", "descricao", CategoryEnum.AMPLIFICADOR, BigDecimal.TEN, 10, true, null);
-//        Company product4 = new Company(null, "Invisivel", "descricao", CategoryEnum.INSTRUMENTO, BigDecimal.TEN, 10, false, null);
-//        Company product5 = new Company(null, "Guitarra4", "descricao", CategoryEnum.INSTRUMENTO, BigDecimal.TEN, 10, true, null);
-//        Company product6 = new Company(null, "Guitarra4", "descricao", CategoryEnum.INSTRUMENTO, BigDecimal.TEN, 10, true, null);
-//        productsRepository.save(product1);
-//        productsRepository.save(product2);
-//        productsRepository.save(product3);
-//        productsRepository.save(product4);
-//        productsRepository.save(product5);
-//        productsRepository.save(product6);
-//
-//        Order order = new Order(null, user1.getId(), LocalDateTime.now(), StatusOrderEnum.CONFIRMADO,2, BigDecimal.valueOf(20), null, null );
-//        ordersRepository.save(order);
-//
-//        ProductOrder productOrder1 = new ProductOrder(null, 2, BigDecimal.valueOf(20), product1.getId(), order.getId(), null, null);
-//        productOrdersRepository.save(productOrder1);
-//
-//        return Boolean.TRUE;
-//    }
+    @Autowired
+    private CompanyRepository companyRepository;
+    @Autowired
+    private StaffRepository staffRepository;
+    @Autowired
+    private CarRepository carRepository;
+    @Autowired
+    private DriverRepository driverRepository;
+    @Autowired
+    private InspectionRepository inspectionRepository;
+    @Autowired
+    private InspectionDetailsRepository inspectionDetailsRepository;
+
+    @Bean
+    public Boolean startDB() {
+
+        Company company = new Company(null, "TechTransport Ltd", "12345678000199", "+5511999999999", "Av. Paulista, 1234, São Paulo, SP", "contact@techtransport.com", null);
+        companyRepository.save(company);
+
+        Staff staff1 = new Staff(null, "john.inspector@example.com", "123", RoleEnum.INSPETOR, "John Inspector", null, null);
+        Staff staff2 = new Staff(null, "jjane.admin@example.com", "123", RoleEnum.GERENTE, "Jane Inspector", null, null);
+        Staff staff3 = new Staff(null, "moto.admin@example.com", "123", RoleEnum.MOTORISTA, "Joao Motorista", null, null);
+        Staff staff4 = new Staff(null, "moto2.admin@example.com", "123", RoleEnum.MOTORISTA, "Joao2 Motorista", null, null);
+        staffRepository.save(staff1);
+        staffRepository.save(staff2);
+        staffRepository.save(staff3);
+        staffRepository.save(staff4);
+
+        Car car1 = new Car(null, CarTypeEnum.COMUM, "Toyota", "RAV4", 2022, "Blue", "XYZ-1234", LocalDateTime.now().minusMonths(1), StatusEnum.DISPONIVEL);
+        Car car2 = new Car(null, CarTypeEnum.CARGA, "Honda", "Civic", 2021, "Red", "ABC-5678", LocalDateTime.now().minusMonths(2), StatusEnum.INDISPONIVEL);
+        carRepository.save(car1);
+        carRepository.save(car2);
+
+        Driver driver1 = new Driver(null, 24, "33424235", car1, staff3, company);
+        Driver driver2 = new Driver(null, 25, "44223435", null, staff4, company);
+        driverRepository.save(driver1);
+        driverRepository.save(driver2);
+
+        Inspection inspection1 = new Inspection(null, InspectionTypeEnum.ENTRADA, LocalDateTime.now().minusDays(1), car1, null, driver1, staff1);
+        Inspection inspection2 = new Inspection(null, InspectionTypeEnum.SAIDA, LocalDateTime.now(), car1, null, driver1, staff1);
+        inspectionRepository.save(inspection1);
+        inspectionRepository.save(inspection2);
+
+
+        InspectionDetails inspectionDetails1 = new InspectionDetails(null, true, true, true, false, true, true, true, true, true, true, false, true, true, true, true, true, true, true, false, true, true, true, true, false, true, true, true, inspection1);
+        InspectionDetails inspectionDetails2 = new InspectionDetails(null, true, false, true, true, true, false, true, true, false, true, true, false, true, false, true, false, true, true, true, false, true, true, true, true, true, false, true, inspection2);
+        inspectionDetailsRepository.save(inspectionDetails1);
+        inspectionDetailsRepository.save(inspectionDetails2);
+
+
+        return Boolean.TRUE;
+    }
+
 }
