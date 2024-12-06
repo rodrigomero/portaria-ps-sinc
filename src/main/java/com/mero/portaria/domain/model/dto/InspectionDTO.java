@@ -1,7 +1,7 @@
 package com.mero.portaria.domain.model.dto;
 
-import com.mero.portaria.domain.enums.InspectionTypeEnum;
 import com.mero.portaria.domain.model.Inspection;
+import com.mero.portaria.domain.model.enums.InspectionTypeEnum;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
