@@ -1,5 +1,6 @@
 package com.mero.portaria.domain.model.dto;
 
+import com.mero.portaria.domain.model.Company;
 import com.mero.portaria.domain.model.Driver;
 import com.mero.portaria.domain.model.Staff;
 import jakarta.validation.constraints.NotEmpty;
@@ -17,7 +18,7 @@ public class DriverDTO {
 
     private Integer id;
 
-    private Integer companyId;
+    private Company company;
 
     private Integer age;
 

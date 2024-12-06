@@ -3,7 +3,6 @@ package com.mero.portaria.controller;
 import com.mero.portaria.domain.model.dto.CreateInspectionDTO;
 import com.mero.portaria.domain.model.dto.InspectionDTO;
 import com.mero.portaria.domain.service.InspectionService;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -31,7 +30,7 @@ public class InspectionController {
     }
 
     @PostMapping("/save")
-    public InspectionDTO saveInspection(@RequestBody @Valid CreateInspectionDTO dto) {
+    public InspectionDTO saveInspection(@RequestBody CreateInspectionDTO dto) {
 
         return service.saveInspection(dto);
     }
