@@ -1,5 +1,6 @@
 package com.mero.portaria.controller;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,4 +23,13 @@ public class ControllerAdvice {
         String mensagemErro = re.getMessage();
         return mensagemErro;
     }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleConstraintViolationException(ConstraintViolationException re) {
+        String mensagemErro = re.getMessage();
+        return mensagemErro;
+    }
+
+
 }
