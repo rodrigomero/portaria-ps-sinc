@@ -34,7 +34,6 @@ public class Driver implements CloneInterface {
     private Staff staff;
 
     @ManyToOne
-    @JoinColumn(name = "company_id")
     private Company company;
 
 }

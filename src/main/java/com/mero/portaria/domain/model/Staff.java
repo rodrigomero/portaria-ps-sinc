@@ -12,8 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,8 +40,5 @@ public class Staff implements CloneInterface {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "driver_id", referencedColumnName = "id")
     private Driver driver;
-
-    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
-    private List<Inspection> inspections;
 
 }

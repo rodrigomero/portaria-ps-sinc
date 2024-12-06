@@ -1,8 +1,10 @@
 package com.mero.portaria.domain.model.dto;
 
+import com.mero.portaria.domain.model.Car;
+import com.mero.portaria.domain.model.Driver;
 import com.mero.portaria.domain.model.Inspection;
+import com.mero.portaria.domain.model.Staff;
 import com.mero.portaria.domain.model.enums.InspectionTypeEnum;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,18 +21,15 @@ public class InspectionDTO {
 
     private Integer id;
 
-    @NotNull
-    private Integer carId;
+    private Car car;
 
-    @NotNull
-    private Integer driverId;
+    private Driver driver;
 
-    @NotNull
     private InspectionTypeEnum type;
 
     private LocalDateTime date;
 
-    private Integer inspectorId;
+    private Staff staff;
 
     public static InspectionDTO toDTO(Inspection inspection) {
         InspectionDTO dto = new InspectionDTO();

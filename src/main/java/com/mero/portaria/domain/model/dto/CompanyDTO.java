@@ -1,7 +1,6 @@
 package com.mero.portaria.domain.model.dto;
 
 import com.mero.portaria.domain.model.Company;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

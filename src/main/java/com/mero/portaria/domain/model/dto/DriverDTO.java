@@ -1,6 +1,7 @@
 package com.mero.portaria.domain.model.dto;
 
 import com.mero.portaria.domain.model.Driver;
+import com.mero.portaria.domain.model.Staff;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,9 +24,9 @@ public class DriverDTO {
     @NotEmpty
     private String cnh;
 
-    private Integer staffId;
-
     private Integer activeCar;
+
+    private Staff staff;
 
     public static DriverDTO toDTO(Driver driver) {
         DriverDTO dto = new DriverDTO();

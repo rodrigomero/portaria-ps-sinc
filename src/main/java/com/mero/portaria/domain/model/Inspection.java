@@ -29,7 +29,7 @@ public class Inspection implements CloneInterface {
 
     private LocalDateTime date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
@@ -37,7 +37,7 @@ public class Inspection implements CloneInterface {
     @JoinColumn(name = "inspection_details_id", referencedColumnName = "id")
     private InspectionDetails inspectionDetails;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "driver_id", referencedColumnName = "id")
     private Driver driver;
 

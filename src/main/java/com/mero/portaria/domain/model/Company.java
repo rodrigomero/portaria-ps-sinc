@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -31,7 +29,5 @@ public class Company implements CloneInterface {
 
     private String email;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private List<Driver> drivers;
 
 }

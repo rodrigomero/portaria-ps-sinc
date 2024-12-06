@@ -1,7 +1,6 @@
 package com.mero.portaria.domain.model.dto;
 
 import com.mero.portaria.domain.model.InspectionDetails;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,6 @@ public class InspectionDetailsDTO {
 
     private Integer id;
 
-    @NotNull
     private Integer inspectionId;
 
     private Boolean pneus;

@@ -30,7 +30,7 @@ public class CarDTO {
     @NotEmpty
     private String model;
 
-    private Integer year;
+    private Integer releaseYear;
 
     private String color;
 

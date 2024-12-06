@@ -48,7 +48,6 @@ public class InspectionDetails implements CloneInterface {
     private Boolean frente;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "inspection_id", referencedColumnName = "id")
     private Inspection inspection;
 
 }
