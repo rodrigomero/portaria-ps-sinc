@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -31,6 +32,7 @@ public class BdInit {
     private InspectionDetailsRepository inspectionDetailsRepository;
 
     @Bean
+    @Transactional
     public Boolean startDB() {
 
         Company company = new Company(null, "TechTransport Ltd", "12345678000199", "+5511999999999", "Av. Paulista, 1234, São Paulo, SP", "contact@techtransport.com", null);
@@ -51,20 +53,18 @@ public class BdInit {
         carRepository.save(car2);
 
         Driver driver1 = new Driver(null, 24, "33424235", car1, staff3, company);
-        Driver driver2 = new Driver(null, 25, "44223435", null, staff4, company);
         driverRepository.save(driver1);
+        Driver driver2 = new Driver(null, 25, "44223435", null, staff4, company);
         driverRepository.save(driver2);
 
-        Inspection inspection1 = new Inspection(null, InspectionTypeEnum.ENTRADA, LocalDateTime.now().minusDays(1), car1, null, driver1, staff1);
-        Inspection inspection2 = new Inspection(null, InspectionTypeEnum.SAIDA, LocalDateTime.now(), car1, null, driver1, staff1);
-        inspectionRepository.save(inspection1);
-        inspectionRepository.save(inspection2);
-
-
-        InspectionDetails inspectionDetails1 = new InspectionDetails(null, true, true, true, false, true, true, true, true, true, true, false, true, true, true, true, true, true, true, false, true, true, true, true, false, true, true, true, inspection1);
-        InspectionDetails inspectionDetails2 = new InspectionDetails(null, true, false, true, true, true, false, true, true, false, true, true, false, true, false, true, false, true, true, true, false, true, true, true, true, true, false, true, inspection2);
+        InspectionDetails inspectionDetails1 = new InspectionDetails(null, true, true, true, false, true, true, true, true, true, true, false, true, true, true, true, true, true, true, false, true, true, true, true, false, true, true, true, null);
+        InspectionDetails inspectionDetails2 = new InspectionDetails(null, true, false, true, true, true, false, true, true, false, true, true, false, true, false, true, false, true, true, true, false, true, true, true, true, true, false, true, null);
         inspectionDetailsRepository.save(inspectionDetails1);
         inspectionDetailsRepository.save(inspectionDetails2);
+
+
+        Inspection inspection1 = new Inspection(null, InspectionTypeEnum.ENTRADA, LocalDateTime.now().minusDays(1), car1, inspectionDetails1, driver1, staff1);
+        inspectionRepository.save(inspection1);
 
 
         return Boolean.TRUE;
