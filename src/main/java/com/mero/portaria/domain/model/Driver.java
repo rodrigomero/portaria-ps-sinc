@@ -2,7 +2,7 @@ package com.mero.portaria.domain.model;
 
 import com.mero.portaria.domain.model.interfaces.CloneInterface;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class Driver implements CloneInterface {
 
     private Integer age;
 
-    @NotBlank
+    @NotEmpty
     private String cnh;
 
     @OneToOne(cascade = CascadeType.ALL)

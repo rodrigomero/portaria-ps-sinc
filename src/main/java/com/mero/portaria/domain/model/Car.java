@@ -6,6 +6,7 @@ import com.mero.portaria.domain.model.enums.StatusEnum;
 import com.mero.portaria.domain.model.interfaces.CloneInterface;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class Car implements CloneInterface {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotEmpty
+    @NotNull
     private CarTypeEnum type;
 
     @NotEmpty

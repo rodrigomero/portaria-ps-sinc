@@ -2,6 +2,7 @@ package com.mero.portaria.domain.model.dto;
 
 import com.mero.portaria.domain.model.Company;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import org.springframework.beans.BeanUtils;
 public class CompanyDTO {
 
     private Integer id;
-    @NotBlank
+    @NotEmpty
     private String name;
 
     private String address;

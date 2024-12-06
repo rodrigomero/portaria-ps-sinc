@@ -1,7 +1,7 @@
 package com.mero.portaria.domain.model.dto;
 
 import com.mero.portaria.domain.model.Driver;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ public class DriverDTO {
 
     private Integer age;
 
-    @NotBlank
+    @NotEmpty
     private String cnh;
 
     private Integer staffId;

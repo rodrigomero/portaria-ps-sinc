@@ -3,7 +3,8 @@ package com.mero.portaria.domain.model.dto;
 import com.mero.portaria.domain.model.Car;
 import com.mero.portaria.domain.model.enums.CarTypeEnum;
 import com.mero.portaria.domain.model.enums.StatusEnum;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,20 +21,20 @@ public class CarDTO {
 
     private Integer id;
 
-    @NotBlank
+    @NotNull
     private CarTypeEnum type;
 
-    @NotBlank
+    @NotEmpty
     private String brand;
 
-    @NotBlank
+    @NotEmpty
     private String model;
 
     private Integer year;
 
     private String color;
 
-    @NotBlank
+    @NotEmpty
     private String plate;
 
     private LocalDateTime lastMaintenance;

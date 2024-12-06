@@ -5,7 +5,8 @@ import com.mero.portaria.domain.model.enums.RoleEnum;
 import com.mero.portaria.domain.model.interfaces.CloneInterface;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,15 +27,16 @@ public class Staff implements CloneInterface {
     private Integer id;
 
     @Email
-    @NotBlank
+    @NotEmpty
     private String email;
 
-    @NotBlank
+    @NotEmpty
     private String password;
 
+    @NotNull
     private RoleEnum role;
 
-    @NotBlank
+    @NotEmpty
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
