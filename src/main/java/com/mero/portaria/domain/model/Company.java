@@ -1,13 +1,11 @@
 package com.mero.portaria.domain.model;
 
-import com.mero.portaria.domain.model.dto.CompanyDTO;
-import com.mero.portaria.domain.utils.UtilReflection;
+import com.mero.portaria.domain.model.interfaces.CloneInterface;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "company")
-public class Company {
+public class Company implements CloneInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,17 +25,13 @@ public class Company {
 
     private String cnpj;
 
-    private String telephone;
+    private String phone;
 
     private String address;
 
     private String email;
 
-    @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     private List<Driver> drivers;
 
-    public void cloneFromDTO(CompanyDTO companyDTO) {
-        String[] ignoredProperties = UtilReflection.getIgnoredProperties(companyDTO);
-        BeanUtils.copyProperties(companyDTO, this, ignoredProperties);
-    }
 }

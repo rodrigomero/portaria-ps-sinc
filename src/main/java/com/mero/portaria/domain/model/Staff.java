@@ -1,23 +1,28 @@
 package com.mero.portaria.domain.model;
 
 
-import com.mero.portaria.domain.model.dto.StaffDTO;
 import com.mero.portaria.domain.model.enums.RoleEnum;
-import com.mero.portaria.domain.utils.UtilReflection;
+import com.mero.portaria.domain.model.interfaces.CloneInterface;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
+
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Staff {
+@Entity
+@Table(name = "staff")
+public class Staff implements CloneInterface {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Email
@@ -32,8 +37,11 @@ public class Staff {
     @NotBlank
     private String name;
 
-    public void cloneFromDTO(StaffDTO staffDTO) {
-        String[] ignoredProperties = UtilReflection.getIgnoredProperties(staffDTO);
-        BeanUtils.copyProperties(staffDTO, this, ignoredProperties);
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "driver_id", referencedColumnName = "id")
+    private Driver driver;
+
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
+    private List<Inspection> inspections;
+
 }

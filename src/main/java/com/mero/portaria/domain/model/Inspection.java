@@ -1,15 +1,14 @@
 package com.mero.portaria.domain.model;
 
 
-import com.mero.portaria.domain.model.dto.InspectionDTO;
 import com.mero.portaria.domain.model.enums.InspectionTypeEnum;
-import com.mero.portaria.domain.utils.UtilReflection;
+import com.mero.portaria.domain.model.interfaces.CloneInterface;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;
 
@@ -17,25 +16,33 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inspection {
+@Entity
+@Table(name = "inspection")
+public class Inspection implements CloneInterface {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    @NotNull
-    private Integer carId;
-
-    @NotNull
-    private Integer driverId;
 
     @NotNull
     private InspectionTypeEnum type;
 
     private LocalDateTime date;
 
-    private Integer inspectorId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
+    private Car car;
 
-    public void cloneFromDTO(InspectionDTO inspectionDTO) {
-        String[] ignoredProperties = UtilReflection.getIgnoredProperties(inspectionDTO);
-        BeanUtils.copyProperties(inspectionDTO, this, ignoredProperties);
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "inspection_details_id", referencedColumnName = "id")
+    private InspectionDetails inspectionDetails;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "driver_id", referencedColumnName = "id")
+    private Driver driver;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private Staff staff;
+
 }

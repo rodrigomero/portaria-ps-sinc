@@ -1,37 +1,40 @@
 package com.mero.portaria.domain.model;
 
-import com.mero.portaria.domain.model.dto.DriverDTO;
-import com.mero.portaria.domain.utils.UtilReflection;
+import com.mero.portaria.domain.model.interfaces.CloneInterface;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Driver {
+@Entity
+@Table(name = "driver")
+public class Driver implements CloneInterface {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    @NotNull
-    private Integer companyId;
 
     private Integer age;
 
     @NotBlank
     private String cnh;
 
-    private Integer staffId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
+    private Car activeCar;
 
-    private Integer activeCar;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "staff_id", referencedColumnName = "id")
+    private Staff staff;
 
-    public void cloneFromDTO(DriverDTO driverDTO) {
-        String[] ignoredProperties = UtilReflection.getIgnoredProperties(driverDTO);
-        BeanUtils.copyProperties(driverDTO, this, ignoredProperties);
-    }
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
 }

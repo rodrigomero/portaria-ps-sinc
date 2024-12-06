@@ -1,16 +1,15 @@
 package com.mero.portaria.domain.model;
 
 
-import com.mero.portaria.domain.model.dto.CarDTO;
 import com.mero.portaria.domain.model.enums.CarTypeEnum;
 import com.mero.portaria.domain.model.enums.StatusEnum;
-import com.mero.portaria.domain.utils.UtilReflection;
-import jakarta.validation.constraints.NotBlank;
+import com.mero.portaria.domain.model.interfaces.CloneInterface;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;
 
@@ -18,32 +17,32 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Car {
+@Entity
+@Table(name = "car")
+public class Car implements CloneInterface {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotBlank
+    @NotEmpty
     private CarTypeEnum type;
 
-    @NotBlank
+    @NotEmpty
     private String brand;
 
-    @NotBlank
+    @NotEmpty
     private String model;
 
-    private Integer year;
+    private Integer releaseYear;
 
     private String color;
 
-    @NotBlank
+    @NotEmpty
     private String plate;
 
     private LocalDateTime lastMaintenance;
 
     private StatusEnum status;
 
-    public void cloneFromDTO(CarDTO carDTO) {
-        String[] ignoredProperties = UtilReflection.getIgnoredProperties(carDTO);
-        BeanUtils.copyProperties(carDTO, this, ignoredProperties);
-    }
 }
