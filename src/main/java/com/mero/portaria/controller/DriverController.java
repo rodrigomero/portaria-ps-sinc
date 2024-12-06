@@ -1,7 +1,9 @@
 package com.mero.portaria.controller;
 
+import com.mero.portaria.domain.model.dto.CreateDriverDTO;
 import com.mero.portaria.domain.model.dto.DriverDTO;
 import com.mero.portaria.domain.service.DriverService;
+import com.mero.portaria.domain.service.StaffService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.List;
 public class DriverController {
 
     private final DriverService service;
+    private final StaffService staffService;
 
     @GetMapping("")
     public List<DriverDTO> getAllDrivers() {
@@ -30,8 +33,7 @@ public class DriverController {
     }
 
     @PostMapping("/save")
-    public DriverDTO saveDriver(@RequestBody @Valid DriverDTO dto) {
-
+    public DriverDTO saveDriver(@RequestBody @Valid CreateDriverDTO dto) {
         return service.saveDriver(dto);
     }
 

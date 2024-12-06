@@ -1,5 +1,6 @@
 package com.mero.portaria.controller;
 
+import com.mero.portaria.domain.model.dto.CreateInspectionDTO;
 import com.mero.portaria.domain.model.dto.InspectionDTO;
 import com.mero.portaria.domain.service.InspectionService;
 import jakarta.validation.Valid;
@@ -30,7 +31,7 @@ public class InspectionController {
     }
 
     @PostMapping("/save")
-    public InspectionDTO saveInspection(@RequestBody @Valid InspectionDTO dto) {
+    public InspectionDTO saveInspection(@RequestBody @Valid CreateInspectionDTO dto) {
 
         return service.saveInspection(dto);
     }

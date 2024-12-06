@@ -21,7 +21,7 @@ public class CarServiceImpl implements CarService {
 
         return repository.findById(id)
                 .map(CarDTO::toDTO)
-                .orElseThrow(() -> new RuntimeException("Nenhuma empresa encontrada para o ID informado"));
+                .orElseThrow(() -> new RuntimeException("Nenhum carro encontrada para o ID informado"));
     }
 
 
@@ -50,5 +50,15 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarDTO> findAll() {
         return repository.findAll().stream().map(CarDTO::toDTO).toList();
+    }
+
+    @Override
+    public Car getAttachedById(Integer id) {
+        Optional<Car> car = repository.findById(id);
+        if (car.isEmpty()) {
+            throw new RuntimeException("Car nao encontrado");
+        }
+        return car.get();
+
     }
 }

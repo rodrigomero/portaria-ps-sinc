@@ -58,4 +58,14 @@ public class CompanyServiceImpl implements CompanyService {
     public List<CompanyDTO> findAll() {
         return repository.findAll().stream().map(CompanyDTO::toDTO).toList();
     }
+
+    @Override
+    public Company getAttachedById(Integer id) {
+        Optional<Company> company = repository.findById(id);
+        if (company.isEmpty()) {
+            throw new RuntimeException("Company nao encontrado");
+        }
+        return company.get();
+
+    }
 }

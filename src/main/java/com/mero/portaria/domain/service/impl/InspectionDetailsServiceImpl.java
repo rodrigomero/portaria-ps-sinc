@@ -25,25 +25,23 @@ public class InspectionDetailsServiceImpl implements InspectionDetailsService {
     }
 
     @Override
-    public InspectionDetailsDTO saveInspectionDetails(InspectionDetailsDTO dto) {
+    public InspectionDetails saveInspectionDetails(InspectionDetailsDTO dto) {
         if (dto.getId() != null) {
             return updateInspectionDetails(dto);
         }
         InspectionDetails entity = dto.toEntity();
-        repository.save(entity);
-        dto.setId(entity.getId());
-        return dto;
+
+        return repository.save(entity);
     }
 
-    private InspectionDetailsDTO updateInspectionDetails(InspectionDetailsDTO dto) {
+    private InspectionDetails updateInspectionDetails(InspectionDetailsDTO dto) {
         Optional<InspectionDetails> inspectionDetails = repository.findById(dto.getId());
         if (inspectionDetails.isEmpty()) {
             throw new RuntimeException("Empresa nao encontrado");
         }
         inspectionDetails.get().cloneFromDTO(dto);
 
-        repository.save(inspectionDetails.get());
-        return InspectionDetailsDTO.toDTO(inspectionDetails.get());
+        return repository.save(inspectionDetails.get());
     }
 
     @Override
